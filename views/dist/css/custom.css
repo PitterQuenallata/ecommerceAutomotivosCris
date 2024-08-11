@@ -1,0 +1,29 @@
+/* Ajuste general del body-wrapper cuando el sidebar no está presente */
+#main-wrapper.no-sidebar .body-wrapper {
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Asegurar que el header no tenga espacio adicional */
+#main-wrapper.no-sidebar .app-header {
+  padding-top: 0 !important;
+}
+
+/* Ajuste específico para container-fluid */
+#main-wrapper.no-sidebar .body-wrapper > .container-fluid {
+  padding-top: 10px !important;  /* Ajusta este valor para separar el contenido del header */
+  margin-top: 0 !important;
+}
+
+/* Si el sidebar está presente */
+#main-wrapper.sidebar-visible .body-wrapper {
+  margin-left: 250px !important; /* Ajusta este valor según el ancho de tu sidebar */
+}
+
+#main-wrapper.sidebar-visible .app-header {
+  padding-top: 0 !important; /* Asegura que el header no tenga padding adicional */
+}
+
+#main-wrapper.sidebar-visible .body-wrapper > .container-fluid {
+  padding-top: 20px !important;  /* Ajusta este valor según sea necesario */
+}

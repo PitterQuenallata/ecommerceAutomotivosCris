@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery-backToTop</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://res.ppizarror.com/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://res.ppizarror.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://res.ppizarror.com/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://res.ppizarror.com/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://res.ppizarror.com/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://res.ppizarror.com/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="https://res.ppizarror.com/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://res.ppizarror.com/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="https://res.ppizarror.com/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Import dependencies -->
+    <script src="example/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="example/font-awesome-v5/css/fontawesome-all.min.css" media="screen">
+
+    <!-- jquery-backToTop -->
+    <script src="jquery-backToTop.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="themes.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="effects.css" media="screen">
+
+    <!-- Website resources -->
+    <link rel="stylesheet" type="text/css" href="example/example.css" media="screen">
+</head>
+<body>
+
+<!-- Body, default -->
+<script>
+    $.backToTop();
+</script>
+
+<div class="inner">
+    <div class="inner-text">
+        Work in progress ...
+    </div>
+</div>
+
+<!-- Scrollable div -->
+<script>
+    let $button = $.backToTop({
+        backgroundColor: '#846990',
+        container: $('.inner'),
+        effect: 'spin-inverse',
+        position: 'bottom left',
+        scrollAnimation: 400,
+        theme: 'fawesome'
+    });
+    $button.resize(50, 50);
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9V5EBDWT03"></script>
+<script>
+    function gtag() {dataLayer.push(arguments);}
+
+    window.dataLayer = window.dataLayer || [];
+    gtag('js', new Date());
+    gtag('config', 'G-9V5EBDWT03');
+</script>
+</body>
+</html>
