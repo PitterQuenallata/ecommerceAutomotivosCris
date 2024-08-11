@@ -32,7 +32,7 @@
             <h6 class="my-3 mx-4 fw-semibold">Categorías</h6>
             <div class="mb-3 mx-4">
               <select class="form-select" id="filtroCategoria" name="filtroCategoria">
-                <option selected disabled>Elige una Categoría</option>
+                <option selected disabled>Seleccione una categoría</option>
                 <?php
                 $categorias = ControladorCategorias::ctrMostrarCategorias();
                 foreach ($categorias as $categoria) {
@@ -45,11 +45,10 @@
 
           <div class="list-group pt-2 border-bottom rounded-0">
             <h6 class="my-3 mx-4 fw-semibold">Filtros</h6>
-            <form id="formFiltrosRepuestos" method="POST">
               <div class="mb-3 mx-4">
                 <label for="filtroMarca" class="form-label">Marca del Vehículo</label>
                 <select class="form-select" id="filtroMarca" name="filtroMarca">
-                  <option selected disabled>Elige una Marca</option>
+                  <option selected disabled>Seleccione una marca</option>
                   <?php
                   $marcas = ControladorRepuestosCards::ctrMostrarMarcas();
                   foreach ($marcas as $marca) {
@@ -78,11 +77,8 @@
               <div class="p-4">
                 <button id="btnResetearFiltros" class="btn btn-secondary w-100">Resetear Filtros</button>
               </div>
-
-            </form>
           </div>
         </div>
-
 
         <!-- Sección de Productos -->
         <div class="card-body p-4 pb-0">
@@ -96,36 +92,16 @@
               <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
             </form>
           </div>
-          <div class="row" id="contenedorRepuestos">
-            <div class="col-sm-6 col-xl-4">
-              <div class="card hover-img overflow-hidden rounded-2">
-                <div class="position-relative">
-                  <a href="javascript:void(0)"><img src="<?php $path ?>views/dist/images/products/suspension.png" class="card-img-top rounded-0" alt="Repuesto 1"></a>
-                  <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Añadir al Carrito"><i class="ti ti-basket fs-4"></i></a>
-                </div>
-                <div class="card-body pt-3 p-4">
-                  <h6 class="fw-semibold fs-4">Repuesto 1</h6>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="fw-semibold fs-4 mb-0">$285</h6>
-                  </div>
-                </div>
+          <div id="swup" class="transition-fade">
+            <div class="container">
+              <div id="contenedorRepuestos" class="row">
+                <!-- Aquí se cargarán los elementos de los repuestos -->
+              </div>
+              <div class="page-load-status">
+                <div class="loader">Cargando más repuestos...</div>
+                <div class="no-more-results">No hay más resultados</div>
               </div>
             </div>
-            <div class="col-sm-6 col-xl-4">
-              <div class="card hover-img overflow-hidden rounded-2">
-                <div class="position-relative">
-                  <a href="javascript:void(0)"><img src="<?php $path ?>views/dist/images/repuestos/suspension.png" class="card-img-top rounded-0" alt="Repuesto 2"></a>
-                  <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Añadir al Carrito"><i class="ti ti-basket fs-4"></i></a>
-                </div>
-                <div class="card-body pt-3 p-4">
-                  <h6 class="fw-semibold fs-4">Repuesto 2</h6>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <h6 class="fw-semibold fs-4 mb-0">$650</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Aquí se generarán dinámicamente los repuestos -->
           </div>
         </div>
 
@@ -133,19 +109,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  //   $(document).ready(function () {
-  //   // Inicializar el plugin backToTop
-  //   $.backToTop({
-  //     backgroundColor: "#007bff", // Color de fondo del botón
-  //     textColor: "#ffffff", // Color del texto
-  //     position: "right", // Posición del botón: 'right' o 'left'
-  //     fadeIn: 400, // Tiempo de fadeIn
-  //     fadeOut: 400, // Tiempo de fadeOut
-  //     scrollDuration: 1000, // Duración del scroll hacia arriba
-  //     showWhenScrollTopIs: 100, // Mostrar el botón cuando se hace scroll hacia abajo
-  //     zIndex: 999, // z-index del botón
-  //   });
-  // });
-</script>

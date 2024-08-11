@@ -2,8 +2,11 @@
 require_once "../controllers/repuestosCards.controller.php";
 require_once "../models/repuestosCards.model.php";
 
-if (isset($_POST['action']) && $_POST['action'] == 'cargarRepuestos') {
-    $repuestos = ControladorRepuestosCards::ctrMostrarRepuestos($_POST);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'cargarRepuestos') {
+    $filtros = $_GET;
+
+    $repuestos = ControladorRepuestosCards::ctrMostrarRepuestos($filtros);
+
     foreach ($repuestos as $repuesto) {
         echo '
         <div class="col-sm-6 col-xl-4">
