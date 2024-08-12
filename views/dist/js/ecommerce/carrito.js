@@ -185,24 +185,24 @@ $(document).ready(function () {
     renderCart(cart);
   }
 
-      // Sincronizar carrito con el servidor al iniciar sesión o registrarse
-      function syncCartWithServer(userId) {
-        var cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+  // Sincronizar carrito con el servidor al iniciar sesión o registrarse
+  function syncCartWithServer(userId) {
+    var cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
 
-        $.ajax({
-            url: 'ajax/carrito.ajax.php',
-            method: 'POST',
-            data: {
-                action: 'syncCart',
-                userId: userId,
-                cart: cart
-            },
-            success: function(response) {
-                console.log('Carrito sincronizado con el servidor:', response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al sincronizar el carrito:', error);
-            }
-        });
-    }
+    $.ajax({
+      url: "ajax/carrito.ajax.php",
+      method: "POST",
+      data: {
+        action: "syncCart",
+        userId: userId,
+        cart: cart,
+      },
+      success: function (response) {
+        console.log("Carrito sincronizado con el servidor:", response);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error al sincronizar el carrito:", error);
+      },
+    });
+  }
 });
