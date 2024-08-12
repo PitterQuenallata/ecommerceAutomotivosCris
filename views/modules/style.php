@@ -1,7 +1,7 @@
     <!-- --------------------------------------------------- -->
     <!-- Favicon -->
     <!-- --------------------------------------------------- -->
-    <link rel="shortcut icon" type="image/png" href="<?php $path ?>views/dist/images/logos/favicon.ico">
+    <!-- <link rel="shortcut icon" type="image/png" href="<?php $path ?>views/dist/images/logos/favicon.ico"> -->
 
         <!-- --------------------------------------------------- -->
     <!-- Owl Carousel -->

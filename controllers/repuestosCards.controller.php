@@ -21,8 +21,8 @@ class ControladorRepuestosCards
   }
 
   // Método para mostrar repuestos basados en los filtros
-  public static function ctrMostrarRepuestos($filtros)
-  {
-    return ModeloRepuestosCards::mdlMostrarRepuestos($filtros);
-  }
+  public static function ctrMostrarRepuestos($filtros) {
+    $tabla = "repuestos";
+    return ModeloRepuestosCards::mdlMostrarRepuestos($tabla, $filtros);
+}
 }

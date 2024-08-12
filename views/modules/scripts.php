@@ -30,6 +30,6 @@
 <!-- ecommerce de la tienda -->
 <!-- ---------------------------------------------- -->
 
-<script src="<?php $path ?>views/dist/js/ecommerce/eRepuestosCards.js"></script>
+<script src="<?php $path ?>views/dist/js/ecommerce/filtrosFormsRepuesto.js"></script>
 
 <script src="<?php $path ?>views/dist/js/ecommerce/scroollAndTop.js"></script>
