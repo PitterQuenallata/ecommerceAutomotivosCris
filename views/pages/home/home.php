@@ -13,3 +13,6 @@
 
   </div>
 </div>
+
+
+<script src="<?php $path ?>views/dist/js/ecommerce/filtrosFormsRepuesto.js"></script>

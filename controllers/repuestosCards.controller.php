@@ -21,8 +21,17 @@ class ControladorRepuestosCards
   }
 
   // Método para mostrar repuestos basados en los filtros
-  public static function ctrMostrarRepuestos($filtros) {
-    $tabla = "repuestos";
-    return ModeloRepuestosCards::mdlMostrarRepuestos($tabla, $filtros);
-}
+  public static function ctrObtenerRepuestosFiltrados($idMotor, $idCategoria)
+  {
+    return ModeloRepuestosCards::mdlObtenerRepuestosFiltrados($idMotor, $idCategoria);
+  }
+
+      /*=============================================
+    Obtener información de un repuesto por ID
+    =============================================*/
+    static public function ctrObtenerRepuestoPorId($idRepuesto) {
+      $respuesta= ModeloRepuestosCards::mdlObtenerRepuestoPorId($idRepuesto);
+      return $respuesta;
+
+  }
 }

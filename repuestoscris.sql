@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-08-2024 a las 19:45:41
+-- Tiempo de generación: 12-08-2024 a las 12:30:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `repuestoscris`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `carritos`
+--
+
+CREATE TABLE `carritos` (
+  `id_carrito` int(11) NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `precio_unitario` decimal(10,2) DEFAULT NULL,
+  `fecha_agregado` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -58,6 +73,8 @@ INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `img_categoria`, `
 
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
+  `user_cliente` varchar(255) NOT NULL,
+  `password_cliente` varchar(255) NOT NULL,
   `nombre_cliente` varchar(255) NOT NULL,
   `apellido_cliente` varchar(255) DEFAULT NULL,
   `nit_ci_cliente` varchar(255) DEFAULT NULL,
@@ -65,9 +82,17 @@ CREATE TABLE `clientes` (
   `compra_cliente` int(11) DEFAULT NULL,
   `direccion_cliente` varchar(255) DEFAULT NULL,
   `email_cliente` varchar(255) DEFAULT NULL,
+  `estado_cliente` tinyint(1) NOT NULL DEFAULT 1,
   `date_created_cliente` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_updated_cliente` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `user_cliente`, `password_cliente`, `nombre_cliente`, `apellido_cliente`, `nit_ci_cliente`, `telefono_cliente`, `compra_cliente`, `direccion_cliente`, `email_cliente`, `estado_cliente`, `date_created_cliente`, `date_updated_cliente`) VALUES
+(1, 'benjo1234', '$2a$07$azybxcags23425sdg23sdem1CFT2u/A.0JOm/IXWxebxaQOkjS85C', 'John', 'Doe', '12345678', '555123456', 0, '123 Main St', 'jdoe@example.com', 1, '2024-08-12 09:06:42', '2024-08-12 10:23:25');
 
 -- --------------------------------------------------------
 
@@ -774,6 +799,13 @@ CREATE TABLE `ventas` (
 --
 
 --
+-- Indices de la tabla `carritos`
+--
+ALTER TABLE `carritos`
+  ADD PRIMARY KEY (`id_carrito`),
+  ADD KEY `id_cliente` (`id_cliente`);
+
+--
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -875,6 +907,12 @@ ALTER TABLE `ventas`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `carritos`
+--
+ALTER TABLE `carritos`
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -884,7 +922,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -949,6 +987,12 @@ ALTER TABLE `ventas`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `carritos`
+--
+ALTER TABLE `carritos`
+  ADD CONSTRAINT `carritos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 
 --
 -- Filtros para la tabla `compras`

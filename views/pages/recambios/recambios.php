@@ -1,16 +1,74 @@
-        <!-- Sección de Productos -->
-        <div class="card-body p-4 pb-0">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <a class="btn btn-primary d-lg-none d-flex" data-bs-toggle="offcanvas" href="#offcanvasFiltros" role="button" aria-controls="offcanvasFiltros">
-              <i class="ti ti-menu-2 fs-6"></i>
-            </a>
-            <h5 class="fs-5 fw-semibold mb-0 d-none d-lg-block">Repuestos</h5>
-            <form class="position-relative">
-              <input type="text" class="form-control search-input py-2 ps-5" id="buscarRepuesto" placeholder="Buscar Repuesto">
-              <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-            </form>
-          </div>
-          <div id="contenedorRepuestos" class="row">
-            <!-- Aquí se cargarán los elementos de los repuestos -->
-          </div>
+<?php
+
+// Capturar los valores de la URL
+$idMarca = isset($_GET['idMarca']) ? $_GET['idMarca'] : null;
+$idModelo = isset($_GET['idModelo']) ? $_GET['idModelo'] : null;
+$idMotor = isset($_GET['idMotor']) ? $_GET['idMotor'] : null;
+
+// Obtener los nombres de marca, modelo y motor
+if ($idMarca && $idModelo && $idMotor) {
+    $nombres = ControladorRecambios::ctrObtenerNombres($idMarca, $idModelo, $idMotor);
+    $nombreMarca = $nombres['nombreMarca'];
+    $nombreModelo = $nombres['nombreModelo'];
+    $nombreMotor = $nombres['nombreMotor'];
+} else {
+    $nombreMarca = "Marca no seleccionada";
+    $nombreModelo = "Modelo no seleccionado";
+    $nombreMotor = "Motor no seleccionado";
+}
+
+?>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid">
+
+    <?php include "modules/cabecera.php"; ?>
+
+    <!-- Sección de Categorías y Filtros -->
+    <div class="row">
+    <?php
+    $categorias = ControladorCategorias::ctrMostrarCategorias();
+    foreach ($categorias as $categoria) {
+        echo '
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card rounded-2 overflow-hidden" onclick="redirigirAProductos(' . $categoria["id_categoria"] . ')">
+                <div class="position-relative">
+                    <img src="' . $path . 'views/dist/images/products/s4.jpg" class="card-img-top rounded-0" alt="' . $categoria["nombre_categoria"] . '">
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h5 class="fw-semibold fs-4 mb-2">' . $categoria["nombre_categoria"] . '</h5>
+                </div>
+            </div>
         </div>
+        ';
+    }
+    ?>
+</div>
+
+
+
+  </div>
+</div>
+
+
+<script>
+// Función para redirigir a la página de productos con los parámetros de filtro
+function redirigirAProductos(idCategoria) {
+    const idMarca = localStorage.getItem("filtroMarca");
+    const idModelo = localStorage.getItem("filtroModelo");
+    const idMotor = localStorage.getItem("filtroMotor");
+
+    let queryParams = [];
+
+    if (idMarca) queryParams.push("idMarca=" + encodeURIComponent(idMarca));
+    if (idModelo) queryParams.push("idModelo=" + encodeURIComponent(idModelo));
+    if (idMotor) queryParams.push("idMotor=" + encodeURIComponent(idMotor));
+    if (idCategoria) queryParams.push("idCategoria=" + encodeURIComponent(idCategoria));
+
+    const queryString = queryParams.join("&");
+    const url = "repuestos?" + queryString;
+
+    window.location.href = url; // Redirigir a la página de productos con los filtros en la URL
+}
+</script>

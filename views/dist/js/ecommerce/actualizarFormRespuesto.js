@@ -1,5 +1,11 @@
 $(document).ready(function () {
+
+  // Inicializar los filtros con valores del localStorage
   initFilters();
+
+  // Capturar el idCategoria de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const idCategoria = urlParams.get('idCategoria');
 
   // Cargar modelos cuando se selecciona una marca
   $("#filtroMarca").change(function () {
@@ -25,10 +31,10 @@ $(document).ready(function () {
   });
 
   // Guardar filtros y realizar la búsqueda cuando se hace clic en "Buscar"
-  $("#formFiltrosRepuestos").submit(function (e) {
+  $("#formFiltrosRepuestosIndependiente").submit(function (e) {
     e.preventDefault(); // Prevenir la acción por defecto del formulario
     updateListaFiltros(); // Guardar los filtros en localStorage
-    enviarFiltrosPorGet(); // Enviar los filtros a través de GET
+    enviarFiltrosPorGet(idCategoria); // Enviar los filtros a través de GET
   });
 
   // Botón de Resetear Filtros
@@ -42,7 +48,7 @@ $(document).ready(function () {
     localStorage.removeItem("filtroMotor");
 
     updateListaFiltros(); // Actualizar la lista de filtros después de resetear
-    window.location.href = "recambios"; // Redirigir a la página de recambios sin filtros
+    window.location.href = "repuestos?idCategoria=" + idCategoria; // Redirigir a la página sin filtros pero con idCategoria
   });
 
   // Función para inicializar los filtros con valores del localStorage
@@ -65,7 +71,16 @@ $(document).ready(function () {
       $("#filtroMotor").val(savedMotor);
     }
 
-    console.log("Filtros restaurados:", savedMarca, savedModelo, savedMotor);
+    // Cargar repuestos con los filtros actuales si los hay
+    if (savedMarca || savedModelo || savedMotor) {
+      $("#listaFiltros").val(
+        JSON.stringify({
+          idMarca: savedMarca,
+          idModelo: savedModelo,
+          idMotor: savedMotor,
+        })
+      );
+    }
   }
 
   // Función para actualizar el input hidden con los filtros seleccionados
@@ -86,13 +101,12 @@ $(document).ready(function () {
     if (idMotor) localStorage.setItem("filtroMotor", idMotor);
 
     $("#listaFiltros").val(JSON.stringify(filtros));
-    console.log("Filtros guardados:", filtros);
   }
 
   // Función para cargar modelos y restaurar la selección si hay
   function cargarModelos(idMarca, selectedModelo = null) {
     $.ajax({
-      url: "ajax/filtrosFormsRepuesto.ajax.php",
+      url: "ajax/actualiFormsRepuesto.ajax.php",
       method: "POST",
       data: { idMarca: idMarca, action: "cargarModelos" },
       success: function (respuesta) {
@@ -110,7 +124,7 @@ $(document).ready(function () {
   // Función para cargar motores y restaurar la selección si hay
   function cargarMotores(idModelo, selectedMotor = null) {
     $.ajax({
-      url: "ajax/filtrosFormsRepuesto.ajax.php",
+      url: "ajax/actualiFormsRepuesto.ajax.php",
       method: "POST",
       data: { idModelo: idModelo, action: "cargarMotores" },
       success: function (respuesta) {
@@ -125,7 +139,7 @@ $(document).ready(function () {
   }
 
   // Función para enviar los filtros a través de GET
-  function enviarFiltrosPorGet() {
+  function enviarFiltrosPorGet(idCategoria) {
     const idMarca = $("#filtroMarca").val();
     const idModelo = $("#filtroModelo").val();
     const idMotor = $("#filtroMotor").val();
@@ -135,9 +149,10 @@ $(document).ready(function () {
     if (idMarca) queryParams.push("idMarca=" + encodeURIComponent(idMarca));
     if (idModelo) queryParams.push("idModelo=" + encodeURIComponent(idModelo));
     if (idMotor) queryParams.push("idMotor=" + encodeURIComponent(idMotor));
+    if (idCategoria) queryParams.push("idCategoria=" + encodeURIComponent(idCategoria));
 
     const queryString = queryParams.join("&");
-    const url = "recambios?" + queryString;
+    const url = "repuestos?" + queryString;
 
     window.location.href = url; // Redirigir a la página con los filtros en la URL
   }

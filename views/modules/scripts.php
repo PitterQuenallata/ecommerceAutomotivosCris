@@ -15,9 +15,9 @@
 <script src="<?php $path ?>views/dist/js/app.horizontal.init.js"></script>
 <script src="<?php $path ?>views/dist/js/app-style-switcher.js"></script>
 <script src="<?php $path ?>views/dist/js/sidebarmenu.js"></script>
-
 <script src="<?php $path ?>views/dist/js/custom.js"></script>
 <script src="<?php $path ?>views/dist/libs/prismjs/prism.js"></script>
+
 
 <!-- ---------------------------------------------- -->
 <!-- current page js files -->
@@ -30,6 +30,6 @@
 <!-- ecommerce de la tienda -->
 <!-- ---------------------------------------------- -->
 
-<script src="<?php $path ?>views/dist/js/ecommerce/filtrosFormsRepuesto.js"></script>
 
 <script src="<?php $path ?>views/dist/js/ecommerce/scroollAndTop.js"></script>
+
